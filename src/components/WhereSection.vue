@@ -4,7 +4,7 @@
     <h2 id="where-title" v-reveal class="display where__title">Dónde encontrarnos</h2>
     <p v-reveal:120 class="eyebrow">Próximamente</p>
     <p v-reveal:220 class="where__copy">
-      Muy pronto, todos los restaurantes y reposterías donde puedes disfrutar Maison Dorée, en un solo lugar.
+      Puntos de venta ya disponibles a nivel nacional, en breve todos los detalles.
     </p>
   </section>
 </template>
