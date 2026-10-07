@@ -61,8 +61,10 @@ function play(src: string, title: string) {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: #25d366;
-  color: #fff;
+  /* Logo de WhatsApp en el vino de la marca (el verde resaltaba demasiado) */
+  background: var(--wine-700);
+  color: var(--cream);
+  border: 1px solid rgba(244, 233, 216, 0.22);
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
   transition: transform 0.35s var(--ease-out);
 }
