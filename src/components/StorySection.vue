@@ -17,7 +17,7 @@
         manabita con unos amigos franceses, quienes insistieron en que más personas debían probarla. Inspirado por su
         motivación, decidí fundar la marca de licores crema de mayor calidad en el mercado ecuatoriano.
       </p>
-      <p v-reveal:250 class="story__body">Así nació Maison Dorée, uniendo una tradición familiar</p>
+      <p v-reveal:250 class="story__body">Así nació Maison Dorée, compartiendo una tradición familiar</p>
 
       <p v-reveal:350 class="story__since">desde 1862</p>
       <p v-reveal:450 class="story__sign">Douglas Pazmiño, fundador</p>
