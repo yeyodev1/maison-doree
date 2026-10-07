@@ -4,15 +4,34 @@ import { reactive, ref } from 'vue'
 const form = reactive({ nombre: '', empresa: '', ciudad: '', telefono: '', correo: '', website: '' })
 const status = ref<'idle' | 'sending' | 'ok' | 'error'>('idle')
 
+// Llega a Douglas por FormSubmit (el mismo servicio que usaba el sitio anterior)
+const ENDPOINT = 'https://formsubmit.co/ajax/maisondoreeliqueur@gmail.com'
+
 async function submit() {
+  // Honeypot: si un bot lo llena, no se envía nada
+  if (form.website) {
+    status.value = 'ok'
+    return
+  }
   status.value = 'sending'
   try {
-    const res = await fetch('/api/contact', {
+    const res = await fetch(ENDPOINT, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        Nombre: form.nombre,
+        Empresa: form.empresa || '—',
+        Ciudad: form.ciudad,
+        Teléfono: form.telefono,
+        Correo: form.correo,
+        _replyto: form.correo,
+        _subject: `Nuevo distribuidor: ${form.nombre} (${form.ciudad})`,
+        _template: 'table',
+        _captcha: 'false',
+      }),
     })
-    if (!res.ok) throw new Error(String(res.status))
+    const data = await res.json().catch(() => ({}))
+    if (!res.ok || String(data.success) !== 'true') throw new Error(data.message || String(res.status))
     status.value = 'ok'
     Object.assign(form, { nombre: '', empresa: '', ciudad: '', telefono: '', correo: '' })
   } catch {
