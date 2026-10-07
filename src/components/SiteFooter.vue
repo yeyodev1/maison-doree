@@ -39,7 +39,7 @@ const year = new Date().getFullYear()
     <section class="terms" aria-labelledby="terms-title">
       <div class="terms__intro">
         <p v-reveal class="foot__eyebrow">Maison Dorée</p>
-        <h2 id="terms-title" v-reveal:100 class="display terms__title">Condiciones de uso</h2>
+        <h2 id="terms-title" v-reveal:100 class="display terms__title"><span>Condiciones</span> <span>de uso</span></h2>
         <p v-reveal:200 class="terms__lead">Lo que necesitas saber antes de servir la primera copa.</p>
       </div>
 
@@ -121,8 +121,14 @@ const year = new Date().getFullYear()
 
 .terms__title {
   margin-top: 18px;
-  font-size: clamp(2.4rem, 3.4vw, 3.6rem);
-  overflow-wrap: anywhere;
+  /* "Condiciones" siempre en una sola línea */
+  font-size: clamp(1.9rem, 2.7vw, 2.9rem);
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+.terms__title span {
+  white-space: nowrap;
 }
 
 .terms__lead {

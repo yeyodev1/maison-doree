@@ -76,6 +76,9 @@ function togglePause() {
   align-items: flex-end;
   overflow: hidden;
   background: var(--wine-950);
+  /* Borde inferior curvo, como la referencia (no recto) */
+  border-bottom-left-radius: clamp(56px, 9vw, 160px);
+  isolation: isolate;
 }
 
 .hero__video {
@@ -90,9 +93,9 @@ function togglePause() {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(28, 3, 2, 0.55) 0%, transparent 22%),
-    linear-gradient(90deg, rgba(28, 3, 2, 0.78) 0%, rgba(28, 3, 2, 0.25) 55%, transparent 80%),
-    linear-gradient(0deg, rgba(42, 6, 4, 0.9) 0%, transparent 35%);
+    linear-gradient(180deg, rgba(28, 3, 2, 0.5) 0%, transparent 20%),
+    linear-gradient(90deg, rgba(28, 3, 2, 0.62) 0%, rgba(28, 3, 2, 0.12) 50%, transparent 72%),
+    linear-gradient(0deg, rgba(28, 3, 2, 0.55) 0%, transparent 28%);
 }
 
 .hero__content {

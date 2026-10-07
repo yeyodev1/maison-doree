@@ -13,6 +13,8 @@
   --font-display: 'Caprasimo', Georgia, serif;
   --font-serif: 'Charis SIL', Georgia, serif;
   --font-script: 'Italianno', cursive;
+  /* La de "Ecuadorian & French cream liqueur" en maisondoree.ec */
+  --font-ecuadorian: 'Quintessential', Georgia, serif;
   --font-sans: 'Montserrat', system-ui, sans-serif;
   --font-narrow: 'Archivo Narrow', 'Arial Narrow', sans-serif;
 

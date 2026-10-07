@@ -137,8 +137,7 @@ const right = [
 }
 
 .header__brand span {
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--font-ecuadorian);
   font-size: 0.85rem;
   white-space: nowrap;
 }

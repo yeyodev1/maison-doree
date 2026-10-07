@@ -12,7 +12,7 @@ import { NEW_FLAVORS } from '../data'
     <div class="nouveau__grid">
       <article v-for="(f, i) in NEW_FLAVORS" :key="f.id" class="card">
         <div class="card__media">
-          <img v-reveal="'zoom'" :src="f.image" :alt="`${f.name}, ${f.es}`" loading="lazy" width="1600" height="2000" />
+          <img v-reveal="'zoom'" :src="f.image" :alt="`${f.name}, ${f.es}`" loading="lazy" width="1600" height="2400" />
 
           <!-- Sello sutil de nuevo sabor -->
           <div v-reveal:400 class="seal" aria-label="Nuevo sabor">
@@ -64,11 +64,20 @@ import { NEW_FLAVORS } from '../data'
   margin: 0 auto;
 }
 
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Arco curvo, como la referencia */
 .card__media {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 4 / 5;
-  background: var(--wine-900);
+  width: min(100%, 460px);
+  aspect-ratio: 2 / 3;
+  border-radius: 999px 999px 0 0;
+  background: #efe3cf;
 }
 
 .card__media img {
@@ -84,13 +93,13 @@ import { NEW_FLAVORS } from '../data'
 
 .seal {
   position: absolute;
-  top: clamp(14px, 2vw, 28px);
-  right: clamp(14px, 2vw, 28px);
+  top: 26%;
+  right: clamp(12px, 2vw, 22px);
   display: grid;
   place-items: center;
   width: clamp(84px, 8vw, 116px);
   aspect-ratio: 1;
-  color: var(--cream);
+  color: var(--wine-700);
 }
 
 .seal svg {
@@ -118,7 +127,7 @@ import { NEW_FLAVORS } from '../data'
   aspect-ratio: 1;
   border-radius: 50%;
   border: 1px solid currentColor;
-  background: rgba(42, 6, 4, 0.55);
+  background: rgba(244, 233, 216, 0.7);
   backdrop-filter: blur(4px);
   font-family: var(--font-script);
   font-size: clamp(1.6rem, 2.4vw, 2.2rem);
