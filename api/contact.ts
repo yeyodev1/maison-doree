@@ -1,3 +1,4 @@
+/// <reference types="node" />
 // Vercel Function: envía el formulario de distribuidores por Resend.
 // Variables: RESEND_API_KEY, CONTACT_TO (destinatario), CONTACT_FROM (remitente verificado).
 
