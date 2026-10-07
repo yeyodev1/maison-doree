@@ -134,8 +134,7 @@ const year = new Date().getFullYear()
 .terms__lead {
   margin: 22px 0 0;
   max-width: 320px;
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--font-ecuadorian);
   font-size: 1.15rem;
   color: var(--f-muted);
 }
@@ -155,7 +154,7 @@ const year = new Date().getFullYear()
 }
 
 .terms__num {
-  font-family: var(--font-narrow);
+  font-family: var(--font-sans);
   font-size: 0.85rem;
   letter-spacing: 0.2em;
   color: var(--f-muted);
@@ -163,7 +162,7 @@ const year = new Date().getFullYear()
 
 .terms__list h3 {
   margin: 10px 0 12px;
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: 1.25rem;
   font-weight: 700;
 }

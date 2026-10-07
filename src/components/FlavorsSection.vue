@@ -67,7 +67,7 @@ onBeforeUnmount(() => {
       </header>
 
       <div class="flavors__viewport">
-        <div class="flavors__track" :style="{ transform: `translate3d(${-progress * last * 100}%, 0, 0)` }">
+        <div class="flavors__track" :style="{ transform: `translate3d(${-index * 100}%, 0, 0)` }">
           <article
             v-for="(f, i) in FLAVORS"
             :key="f.id"
@@ -167,8 +167,7 @@ onBeforeUnmount(() => {
   border: 0;
   background: none;
   padding: 4px 0;
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--font-sans);
   font-size: 0.9rem;
   color: var(--cream-dim);
   transition: color 0.3s;
@@ -205,6 +204,8 @@ onBeforeUnmount(() => {
   display: flex;
   height: 100%;
   will-change: transform;
+  /* Siempre un sabor completo: cambia solo al pasar cada tramo de scroll */
+  transition: transform 0.9s var(--ease-out);
 }
 
 .slide {
@@ -264,7 +265,7 @@ onBeforeUnmount(() => {
 
 .slide__es {
   margin: 0;
-  font-family: var(--font-narrow);
+  font-family: var(--font-sans);
   font-size: 0.8rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -272,7 +273,7 @@ onBeforeUnmount(() => {
 
 .slide__note {
   margin: 0 0 8px;
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: 0.98rem;
   line-height: 1.5;
   color: var(--cream-dim);

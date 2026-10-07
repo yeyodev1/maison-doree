@@ -1,9 +1,10 @@
 <template>
+  <!-- En pausa hasta enero: ahí se agregan los logos de restaurantes y reposterías aliados -->
   <section id="donde" class="where" aria-labelledby="where-title">
-    <p v-reveal class="eyebrow">Dónde encontrarnos</p>
-    <h2 id="where-title" v-reveal:120 class="display where__title">Próximamente</h2>
-    <p v-reveal:240 class="where__copy">
-      Estamos preparando nuestros primeros puntos de venta en Ecuador. Mientras tanto, pide tu botella por WhatsApp.
+    <h2 id="where-title" v-reveal class="display where__title">Dónde encontrarnos</h2>
+    <p v-reveal:120 class="eyebrow">Próximamente</p>
+    <p v-reveal:220 class="where__copy">
+      Muy pronto, todos los restaurantes y reposterías donde puedes disfrutar Maison Dorée, en un solo lugar.
     </p>
   </section>
 </template>
@@ -19,15 +20,14 @@
 }
 
 .where__title {
-  font-size: clamp(2.2rem, 10vw, 8rem);
+  font-size: clamp(2.2rem, 7vw, 6rem);
 }
 
 .where__copy {
   max-width: 520px;
   margin: 0;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
   color: var(--cream-dim);
 }
 </style>

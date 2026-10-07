@@ -93,9 +93,8 @@ function togglePause() {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(28, 3, 2, 0.5) 0%, transparent 20%),
-    linear-gradient(90deg, rgba(28, 3, 2, 0.62) 0%, rgba(28, 3, 2, 0.12) 50%, transparent 72%),
-    linear-gradient(0deg, rgba(28, 3, 2, 0.55) 0%, transparent 28%);
+    linear-gradient(180deg, rgba(28, 3, 2, 0.45) 0%, transparent 16%),
+    linear-gradient(90deg, rgba(28, 3, 2, 0.5) 0%, transparent 45%);
 }
 
 .hero__content {
@@ -117,9 +116,14 @@ function togglePause() {
   display: block;
 }
 
+.hero__title,
+.hero__sub {
+  text-shadow: 0 2px 24px rgba(20, 2, 1, 0.45);
+}
+
 .hero__sub {
   margin: 18px 0 34px;
-  font-family: var(--font-serif);
+  font-family: var(--font-ecuadorian);
   font-size: clamp(1.15rem, 1.8vw, 1.6rem);
 }
 

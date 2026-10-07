@@ -11,12 +11,10 @@
   --gold: #c9a24a;
 
   --font-display: 'Caprasimo', Georgia, serif;
-  --font-serif: 'Charis SIL', Georgia, serif;
   --font-script: 'Italianno', cursive;
   /* La de "Ecuadorian & French cream liqueur" en maisondoree.ec */
   --font-ecuadorian: 'Quintessential', Georgia, serif;
   --font-sans: 'Montserrat', system-ui, sans-serif;
-  --font-narrow: 'Archivo Narrow', 'Arial Narrow', sans-serif;
 
   --gutter: clamp(20px, 5vw, 72px);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);

@@ -87,8 +87,7 @@ async function submit() {
 
 .contact__sub {
   margin: 0;
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--font-sans);
   font-size: 1.15rem;
   color: var(--cream-dim);
 }
@@ -126,7 +125,7 @@ async function submit() {
   border-bottom: 1px solid var(--cream-faint);
   background: transparent;
   color: var(--cream);
-  font: 400 1.05rem var(--font-serif);
+  font: 400 1.05rem var(--font-sans);
   transition: border-color 0.3s;
 }
 
@@ -160,8 +159,7 @@ async function submit() {
 .contact__status {
   min-height: 1.5em;
   margin: 0;
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--font-sans);
   color: var(--cream-dim);
 }
 

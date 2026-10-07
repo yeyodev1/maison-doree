@@ -10,22 +10,12 @@ import { NEW_FLAVORS } from '../data'
     </header>
 
     <div class="nouveau__grid">
-      <article v-for="(f, i) in NEW_FLAVORS" :key="f.id" class="card">
+      <article v-for="f in NEW_FLAVORS" :key="f.id" class="card">
         <div class="card__media">
           <img v-reveal="'zoom'" :src="f.image" :alt="`${f.name}, ${f.es}`" loading="lazy" width="1600" height="2400" />
 
-          <!-- Sello sutil de nuevo sabor -->
-          <div v-reveal:400 class="seal" aria-label="Nuevo sabor">
-            <svg viewBox="0 0 120 120" aria-hidden="true">
-              <defs>
-                <path :id="`seal-path-${i}`" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" />
-              </defs>
-              <text>
-                <textPath :href="`#seal-path-${i}`">Nouvelle saveur · Nuevo sabor ·</textPath>
-              </text>
-            </svg>
-            <span>N</span>
-          </div>
+          <!-- Sello sutil de nuevo sabor (fijo, sin girar) -->
+          <span v-reveal:400 class="seal">Nuevo sabor</span>
         </div>
 
         <div v-reveal:150 class="card__body">
@@ -93,52 +83,18 @@ import { NEW_FLAVORS } from '../data'
 
 .seal {
   position: absolute;
-  top: 26%;
+  top: 30%;
   right: clamp(12px, 2vw, 22px);
-  display: grid;
-  place-items: center;
-  width: clamp(84px, 8vw, 116px);
-  aspect-ratio: 1;
-  color: var(--wine-700);
-}
-
-.seal svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  animation: spin 22s linear infinite;
-}
-
-.seal text {
-  fill: currentColor;
-  font-family: var(--font-sans);
-  font-size: 10.4px;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-
-.seal span {
-  display: grid;
-  place-items: center;
-  width: 44%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: 1px solid currentColor;
-  background: rgba(244, 233, 216, 0.7);
+  padding: 7px 14px;
+  border: 1px solid rgba(58, 8, 5, 0.35);
+  border-radius: 999px;
+  background: rgba(251, 246, 238, 0.75);
   backdrop-filter: blur(4px);
-  font-family: var(--font-script);
-  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
-  line-height: 1;
-  padding-top: 4px;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  color: var(--wine-700);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
 }
 
 .card__body {
@@ -152,7 +108,7 @@ import { NEW_FLAVORS } from '../data'
 
 .card__es {
   margin: 10px 0 6px;
-  font-family: var(--font-narrow);
+  font-family: var(--font-sans);
   letter-spacing: 0.3em;
   text-transform: uppercase;
   font-size: 0.85rem;
@@ -160,8 +116,7 @@ import { NEW_FLAVORS } from '../data'
 
 .card__note {
   margin: 0;
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--font-sans);
   color: var(--cream-dim);
 }
 
@@ -172,9 +127,4 @@ import { NEW_FLAVORS } from '../data'
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .seal svg {
-    animation: none;
-  }
-}
 </style>

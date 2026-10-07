@@ -73,12 +73,11 @@
 }
 
 .story__title img {
-  width: clamp(200px, 22vw, 320px);
+  width: clamp(150px, 15vw, 220px);
   height: auto;
 }
 
-.story__title span,
-.story__since {
+.story__title span {
   font-family: var(--font-ecuadorian);
   font-weight: 400;
 }
@@ -97,7 +96,9 @@
 
 .story__since {
   margin: 18px 0 0;
-  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
   line-height: 1.1;
   color: var(--cream);
 }

@@ -75,8 +75,7 @@ function accept() {
 
 .gate__copy {
   margin: 0;
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--font-sans);
   font-size: 1.15rem;
   color: var(--cream-dim);
 }

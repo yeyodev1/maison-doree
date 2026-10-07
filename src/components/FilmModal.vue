@@ -67,8 +67,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
 
 .film__title {
   margin: 0;
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--font-sans);
   color: var(--cream-dim);
 }
 
