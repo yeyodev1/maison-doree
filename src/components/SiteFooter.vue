@@ -134,8 +134,12 @@ const year = new Date().getFullYear()
 .terms__lead {
   margin: 22px 0 0;
   max-width: 320px;
-  font-family: var(--font-ecuadorian);
-  font-size: 1.15rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  line-height: 1.9;
+  font-size: 0.78rem;
   color: var(--f-muted);
 }
 

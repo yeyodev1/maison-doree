@@ -122,9 +122,12 @@ function togglePause() {
 }
 
 .hero__sub {
-  margin: 18px 0 34px;
-  font-family: var(--font-ecuadorian);
-  font-size: clamp(1.15rem, 1.8vw, 1.6rem);
+  margin: 22px 0 34px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: clamp(0.8rem, 1vw, 0.95rem);
 }
 
 .hero__actions {

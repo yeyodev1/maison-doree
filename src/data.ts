@@ -72,13 +72,13 @@ export const NEW_FLAVORS = [
     name: 'Saint Manicho',
     es: 'Santo Manicho',
     note: 'Licor crema de chocolate y maní.',
-    image: '/images/arco-saint-manicho-v2.jpg',
+    image: '/images/arco-saint-manicho-v3.jpg',
   },
   {
     id: 'pistache',
     name: 'Délice de Pistache',
     es: 'Delicia de pistacho',
     note: 'Licor crema de pistacho.',
-    image: '/images/arco-pistache-v2.jpg',
+    image: '/images/arco-pistache-v3.jpg',
   },
 ] as const
