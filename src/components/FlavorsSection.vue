@@ -180,6 +180,7 @@ const STAGGER = 140
   font-family: var(--font-sans);
   font-size: 0.85rem;
   line-height: 1.5;
+  text-wrap: balance;
   color: var(--cream-dim);
   text-wrap: pretty;
 }
