@@ -4,43 +4,68 @@ import { FLAVORS } from '../data'
 
 const emit = defineEmits<{ play: [src: string, title: string] }>()
 
-// Carrusel guiado por el scroll: la sección se fija y los sabores avanzan
-// de izquierda a derecha mientras el usuario baja.
+// Carrusel automático: la página se recorre libre y, mientras la sección está
+// a la vista, los sabores pasan solos. Tocar una pestaña o flecha reinicia el tiempo.
+const INTERVAL = 5000
 const section = ref<HTMLElement>()
-const progress = ref(0)
-const last = FLAVORS.length - 1
-const index = computed(() => Math.min(last, Math.round(progress.value * last)))
+const index = ref(0)
+const visible = ref(false)
+const reduced = ref(false)
+const running = computed(() => visible.value && !reduced.value)
+// Cambia la key para reiniciar la barra de progreso en cada sabor
+const tick = ref(0)
 
-let frame = 0
-function measure() {
-  frame = 0
-  const el = section.value
-  if (!el) return
-  const rect = el.getBoundingClientRect()
-  const travel = rect.height - window.innerHeight
-  progress.value = travel > 0 ? Math.min(1, Math.max(0, -rect.top / travel)) : 0
-}
-function onScroll() {
-  if (!frame) frame = requestAnimationFrame(measure)
+let timer = 0
+function schedule() {
+  clearTimeout(timer)
+  if (running.value && !document.hidden) timer = window.setTimeout(next, INTERVAL)
 }
 
 function goTo(i: number) {
-  const el = section.value
-  if (!el) return
-  const top = el.getBoundingClientRect().top + window.scrollY
-  const travel = el.offsetHeight - window.innerHeight
-  window.scrollTo({ top: top + (travel * i) / last, behavior: 'smooth' })
+  index.value = (i + FLAVORS.length) % FLAVORS.length
+  tick.value++
+  schedule()
+}
+function next() {
+  goTo(index.value + 1)
+}
+function prev() {
+  goTo(index.value - 1)
+}
+
+// Deslizar con el dedo en móvil
+let startX = 0
+function onTouchStart(e: TouchEvent) {
+  startX = e.touches[0]!.clientX
+}
+function onTouchEnd(e: TouchEvent) {
+  const dx = e.changedTouches[0]!.clientX - startX
+  if (Math.abs(dx) > 40) (dx < 0 ? next : prev)()
+}
+
+let io: IntersectionObserver | undefined
+function onVisibility() {
+  tick.value++
+  schedule()
 }
 
 onMounted(() => {
-  measure()
-  window.addEventListener('scroll', onScroll, { passive: true })
-  window.addEventListener('resize', onScroll)
+  reduced.value = matchMedia('(prefers-reduced-motion: reduce)').matches
+  io = new IntersectionObserver(
+    ([entry]) => {
+      visible.value = entry!.isIntersecting
+      tick.value++
+      schedule()
+    },
+    { threshold: 0.45 },
+  )
+  if (section.value) io.observe(section.value)
+  document.addEventListener('visibilitychange', onVisibility)
 })
 onBeforeUnmount(() => {
-  window.removeEventListener('scroll', onScroll)
-  window.removeEventListener('resize', onScroll)
-  cancelAnimationFrame(frame)
+  io?.disconnect()
+  clearTimeout(timer)
+  document.removeEventListener('visibilitychange', onVisibility)
 })
 </script>
 
@@ -49,9 +74,12 @@ onBeforeUnmount(() => {
     id="sabores"
     ref="section"
     class="flavors"
-    :style="{ '--count': FLAVORS.length, '--accent': FLAVORS[index]!.accent }"
+    :style="{ '--accent': FLAVORS[index]!.accent }"
+    aria-roledescription="carrusel"
+    @touchstart.passive="onTouchStart"
+    @touchend.passive="onTouchEnd"
   >
-    <div class="flavors__sticky">
+    <div class="flavors__stage">
       <div class="flavors__glow" aria-hidden="true"></div>
       <img class="flavors__eagle" src="/images/eagle-tint.png" alt="" aria-hidden="true" />
 
@@ -98,8 +126,18 @@ onBeforeUnmount(() => {
         </div>
       </div>
 
-      <div class="flavors__progress" aria-hidden="true">
-        <span :style="{ transform: `scaleX(${(index + 1) / FLAVORS.length})` }"></span>
+      <div class="flavors__nav">
+        <button class="flavors__arrow" type="button" aria-label="Sabor anterior" @click="prev">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+        </button>
+        <div class="flavors__progress" aria-hidden="true">
+          <span v-for="(f, i) in FLAVORS" :key="f.id" :class="{ 'is-done': i < index }">
+            <i v-if="i === index" :key="tick" :class="{ 'is-running': running }"></i>
+          </span>
+        </div>
+        <button class="flavors__arrow" type="button" aria-label="Sabor siguiente" @click="next">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+        </button>
       </div>
     </div>
   </section>
@@ -109,17 +147,17 @@ onBeforeUnmount(() => {
 /* Mobile first */
 .flavors {
   position: relative;
-  height: calc(var(--count) * 100svh);
 }
 
-.flavors__sticky {
-  position: sticky;
-  top: 0;
+.flavors__stage {
+  position: relative;
   height: 100svh;
+  min-height: 620px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: 64px 0 28px;
+  /* Abajo deja espacio al botón flotante de WhatsApp */
+  padding: 64px 0 88px;
 }
 
 .flavors__glow {
@@ -244,15 +282,15 @@ onBeforeUnmount(() => {
 }
 
 .b--750 {
-  height: clamp(220px, 38svh, 520px);
+  height: clamp(180px, 34svh, 520px);
 }
 
 .b--375 {
-  height: clamp(170px, 29svh, 400px);
+  height: clamp(140px, 26svh, 400px);
 }
 
 .b--160 {
-  height: clamp(110px, 19svh, 260px);
+  height: clamp(90px, 17svh, 260px);
 }
 
 .slide__info {
@@ -284,25 +322,73 @@ onBeforeUnmount(() => {
   padding: 0 26px;
 }
 
-.flavors__progress {
+.flavors__nav {
   position: relative;
-  width: min(240px, 60vw);
-  height: 1px;
-  margin: 18px auto 0;
-  background: var(--cream-faint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.flavors__arrow {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--cream-faint);
+  background: none;
+  transition: border-color 0.3s;
+}
+
+.flavors__arrow:hover {
+  border-color: var(--cream);
+}
+
+.flavors__progress {
+  display: flex;
+  gap: 6px;
+  width: min(240px, 50vw);
 }
 
 .flavors__progress span {
+  position: relative;
+  flex: 1;
+  height: 1px;
+  overflow: hidden;
+  background: var(--cream-faint);
+}
+
+.flavors__progress span.is-done {
+  background: var(--cream);
+}
+
+.flavors__progress i {
   position: absolute;
   inset: 0;
   background: var(--cream);
   transform-origin: left;
-  transition: transform 0.5s var(--ease-out);
+  /* Se llena en el tiempo que tarda en pasar al siguiente sabor */
+  animation: fill 5s linear both paused;
+}
+
+.flavors__progress i.is-running {
+  animation-play-state: running;
+}
+
+@keyframes fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }
 
 /* Tablet / escritorio */
 @media (min-width: 900px) {
-  .flavors__sticky {
+  .flavors__stage {
     padding: 96px 0 40px;
   }
 
@@ -347,30 +433,11 @@ onBeforeUnmount(() => {
   }
 }
 
-/* Sin animaciones: carrusel horizontal normal con deslizamiento */
+/* Sin animaciones: no pasa solo, se navega con flechas o pestañas */
 @media (prefers-reduced-motion: reduce) {
-  .flavors {
-    height: auto;
-  }
-
-  .flavors__sticky {
-    position: relative;
-    height: auto;
-    min-height: 100svh;
-  }
-
-  .flavors__viewport {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-  }
-
-  .flavors__track {
-    transform: none !important;
-  }
-
+  .flavors__track,
   .slide {
-    scroll-snap-align: center;
-    opacity: 1;
+    transition: none;
   }
 }
 </style>

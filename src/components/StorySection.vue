@@ -33,6 +33,10 @@
   align-items: center;
   overflow: hidden;
   background: var(--wine-950);
+  /* Curvas como el video del inicio: una al entrar y otra al salir */
+  border-top-right-radius: clamp(56px, 9vw, 160px);
+  border-bottom-left-radius: clamp(56px, 9vw, 160px);
+  isolation: isolate;
 }
 
 .story__bg {
