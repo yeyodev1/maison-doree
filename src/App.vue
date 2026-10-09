@@ -27,7 +27,7 @@ function play(src: string, title: string) {
 
   <main>
     <HeroSection @play="play" />
-    <FlavorsSection @play="play" />
+    <FlavorsSection />
     <hr class="rule" />
     <NewFlavorsSection />
     <StorySection />

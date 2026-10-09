@@ -16,7 +16,6 @@ export interface Flavor {
   bottle: string
   ticket: string
   mini: string
-  film: string
 }
 
 export const FLAVORS: Flavor[] = [
@@ -29,7 +28,6 @@ export const FLAVORS: Flavor[] = [
     bottle: '/images/bottle-vanille.png',
     ticket: '/images/ticket-vanille.png',
     mini: '/images/mini-vanille.png',
-    film: '/video/vanille.mp4',
   },
   {
     id: 'cacao',
@@ -40,7 +38,6 @@ export const FLAVORS: Flavor[] = [
     bottle: '/images/bottle-cacao.png',
     ticket: '/images/ticket-cacao.png',
     mini: '/images/mini-cacao.png',
-    film: '/video/cacao.mp4',
   },
   {
     id: 'brise',
@@ -51,7 +48,6 @@ export const FLAVORS: Flavor[] = [
     bottle: '/images/bottle-brise.png',
     ticket: '/images/ticket-brise.png',
     mini: '/images/mini-brise-v2.png',
-    film: '/video/brise.mp4',
   },
   {
     id: 'creme',
@@ -62,7 +58,6 @@ export const FLAVORS: Flavor[] = [
     bottle: '/images/bottle-creme.png',
     ticket: '/images/ticket-creme.png',
     mini: '/images/mini-creme.png',
-    film: '/video/creme.mp4',
   },
 ]
 

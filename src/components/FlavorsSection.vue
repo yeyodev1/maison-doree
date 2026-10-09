@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { FLAVORS } from '../data'
 
-const emit = defineEmits<{ play: [src: string, title: string] }>()
-
 // Los cuatro sabores a la vista de golpe; entran escalonados con v-reveal
 const STAGGER = 140
 </script>
@@ -35,10 +33,6 @@ const STAGGER = 140
           <h3 class="display flavor__name">{{ f.name }}</h3>
           <p class="flavor__es">{{ f.es }}</p>
           <p class="flavor__note">{{ f.note }}</p>
-          <button class="btn flavor__film" type="button" @click="emit('play', f.film, `${f.name} — el film`)">
-            <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" /></svg>
-            Ver el film
-          </button>
         </div>
       </li>
     </ul>
@@ -176,21 +170,13 @@ const STAGGER = 140
 
 .flavor__note {
   flex: 1;
-  margin: 0 0 6px;
+  margin: 0;
   font-family: var(--font-sans);
   font-size: 0.85rem;
   line-height: 1.5;
   text-wrap: balance;
   color: var(--cream-dim);
   text-wrap: pretty;
-}
-
-.flavor__film {
-  min-height: 44px;
-  gap: 8px;
-  padding: 0 16px;
-  font-size: 0.68rem;
-  letter-spacing: 0.18em;
 }
 
 /* Hover sutil: las botellas suben un poco y el halo se enciende */
@@ -248,12 +234,6 @@ const STAGGER = 140
 
   .flavor__note {
     font-size: 0.95rem;
-  }
-
-  .flavor__film {
-    padding: 0 24px;
-    font-size: 0.74rem;
-    letter-spacing: 0.22em;
   }
 }
 
